@@ -51,6 +51,10 @@
   ul.sym{list-style:none; padding:0; margin:0}
   ul.sym li{padding:7px 0 7px 30px; position:relative; color:var(--text)}
   ul.sym li::before{content:"🔴"; position:absolute; left:0; font-size:14px}
+  figure.shot{margin:18px 0 0}
+  .shot-scroll{max-height:340px; overflow-y:auto; border:1px solid var(--line); border-radius:14px; background:#0b0d11; padding:12px; text-align:center}
+  .shot-scroll img{max-width:300px; width:100%; height:auto; border-radius:8px; display:inline-block}
+  figure.shot figcaption{color:var(--muted); font-size:13px; text-align:center; margin-top:8px}
   .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px}
   @media(max-width:720px){.grid{grid-template-columns:1fr}}
   .feat{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px}
@@ -98,9 +102,18 @@
         <li>Tab groups <b>multiply on every restart</b> and never go away.</li>
         <li>It's worse with <b>Tab Session Manager (TSM)</b> restoring your session.</li>
         <li>Chrome gets <b>slower and slower to start</b> the more they pile up.</li>
+        <li>There's <b>no batch delete</b> — the only built-in way to remove them is clicking each group one by one.</li>
         <li>Turning off “Save tab groups” loses your group names; deleting them by hand just brings them back.</li>
       </ul>
     </div>
+
+    <figure class="shot">
+      <div class="shot-scroll">
+        <img src="tabgrouphell.jpg" alt="Chrome's Add to group menu showing dozens of duplicate tab groups, the same few groups repeated over and over">
+      </div>
+      <figcaption>A real “Add to group” menu — the same handful of groups, duplicated dozens of times. Scroll inside the box ↕</figcaption>
+    </figure>
+
     <p class="note">If any of that rings a bell — this fixes it.</p>
   </section>
 

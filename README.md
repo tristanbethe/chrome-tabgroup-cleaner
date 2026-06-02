@@ -16,6 +16,8 @@ it clean automatically.
 - It's worse with **Tab Session Manager (TSM)** restoring your session — TSM
   recreates the groups on each startup, but Chrome never removes the old copies.
 - Chrome gets **slower and slower to start** the more they pile up.
+- There's **no batch delete** — you can't get rid of them without manually clicking
+  each group one by one.
 - Turning off "Save tab groups" *loses your group names*, and deleting duplicates
   by hand just brings them back.
 
