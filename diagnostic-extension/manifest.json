@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Group Diagnostic v1",
+  "version": "1.0.0",
+  "description": "Diagnose tool for tab group duplication issue",
+  "permissions": [
+    "tabGroups",
+    "tabs",
+    "windows",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tab Group Diagnostic"
+  }
+}

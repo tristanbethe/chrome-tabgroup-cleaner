@@ -1,0 +1,7 @@
+# All core functionality is pure-Python standard library — no required deps.
+# These are OPTIONAL quality-of-life packages:
+colorama>=0.4.6   # colored console output (falls back to plain text without it)
+psutil>=5.9.0     # faster/robuster process detection (falls back to OS commands)
+
+# For building standalone executables (python build_exe.py), also install:
+#   pyinstaller>=6.0

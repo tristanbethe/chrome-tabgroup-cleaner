@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tab Group Diagnostic</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    width: 560px;
+    padding: 14px;
+    background: #1e1e1e;
+    color: #e0e0e0;
+    margin: 0;
+  }
+  h2 {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 8px;
+  }
+  h3 {
+    margin: 14px 0 6px 0;
+    font-size: 13px;
+    color: #93c5fd;
+  }
+  .btn-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  button:hover { background: #1d4ed8; }
+  button.danger { background: #dc2626; }
+  button.danger:hover { background: #b91c1c; }
+  button.secondary { background: #4b5563; }
+  button.secondary:hover { background: #374151; }
+  pre {
+    background: #2d2d2d;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 11px;
+    max-height: 350px;
+    margin: 6px 0;
+    font-family: "Consolas", "Monaco", monospace;
+    line-height: 1.4;
+  }
+  .stat {
+    background: #333;
+    padding: 8px 10px;
+    border-radius: 4px;
+    margin: 4px 0;
+    font-size: 12px;
+  }
+  .stat b { color: #fbbf24; }
+  .dup { color: #f87171; }
+  .ok { color: #4ade80; }
+  .warn { color: #fbbf24; }
+  .copy-btn {
+    float: right;
+    background: #374151;
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+</style>
+</head>
+<body>
+  <h2>📊 Tab Group Diagnostic v1</h2>
+  
+  <div class="btn-row">
+    <button id="scan">🔍 Full scan</button>
+    <button id="windows" class="secondary">🪟 Per window</button>
+    <button id="duplicates" class="secondary">🔴 Show duplicates</button>
+    <button id="export" class="secondary">📋 Copy as JSON</button>
+    <button id="clear" class="secondary">🧹 Clear</button>
+  </div>
+  
+  <div id="output"></div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

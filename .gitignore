@@ -1,0 +1,26 @@
+# Backups created by the tools (your own Chrome data — never commit these)
+python-tools/backups/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# PyInstaller build artifacts
+python-tools/build/
+python-tools/dist/
+*.spec
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local Windows shortcuts (machine-specific paths)
+*.lnk
+
+# Original snapshot bundle (not needed in the repo)
+*.zip
