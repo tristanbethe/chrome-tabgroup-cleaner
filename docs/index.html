@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tab Group Cleaner — Fix Chrome's duplicating Saved Tab Groups</title>
+<meta name="description" content="Free, open-source tool that fixes Chrome's Saved tab groups duplicating on every restart (especially with Tab Session Manager) and slowing startup. Safe, with automatic backups.">
+<meta name="keywords" content="Chrome saved tab groups, tab groups duplicating, Tab Session Manager duplicate tab groups, Chrome tab groups keep coming back, Chrome slow startup tab groups">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧹</text></svg>">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tab Group Cleaner — Fix Chrome's duplicating Saved Tab Groups">
+<meta property="og:description" content="Free, open-source fix for Chrome saved tab groups multiplying on every restart. Safe, reversible, no Python needed.">
+<meta property="og:url" content="https://tabgroupcleaner.com">
+<style>
+  :root{
+    --bg:#0f1115; --card:#171a21; --card2:#1d212b; --line:#2a2f3a;
+    --text:#e6e8ec; --muted:#9aa3b2; --accent:#3b82f6; --accent2:#22c55e;
+    --red:#f87171; --yellow:#fbbf24;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+  }
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:880px; margin:0 auto; padding:0 20px}
+  .hero{
+    text-align:center; padding:72px 20px 40px;
+    background:radial-gradient(900px 380px at 50% -10%, rgba(59,130,246,.18), transparent 70%);
+  }
+  .logo{font-size:64px; line-height:1}
+  h1{font-size:40px; margin:14px 0 8px; letter-spacing:-.5px}
+  .tag{font-size:19px; color:var(--muted); max-width:620px; margin:0 auto 28px}
+  .btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+  .btn{
+    display:inline-block; padding:13px 22px; border-radius:10px; font-weight:600;
+    font-size:15px; border:1px solid transparent;
+  }
+  .btn.primary{background:var(--accent); color:#fff}
+  .btn.primary:hover{background:#2f6fe0; text-decoration:none}
+  .btn.ghost{background:transparent; border-color:var(--line); color:var(--text)}
+  .btn.ghost:hover{border-color:var(--accent); text-decoration:none}
+  .sub{margin-top:12px; font-size:13px; color:var(--muted)}
+  section{padding:34px 0}
+  h2{font-size:24px; margin:0 0 16px; letter-spacing:-.3px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px 24px; margin:14px 0}
+  ul.sym{list-style:none; padding:0; margin:0}
+  ul.sym li{padding:7px 0 7px 30px; position:relative; color:var(--text)}
+  ul.sym li::before{content:"🔴"; position:absolute; left:0; font-size:14px}
+  .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .feat{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px}
+  .feat h3{margin:0 0 6px; font-size:17px}
+  .feat p{margin:0; color:var(--muted); font-size:14px}
+  table{width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden}
+  th,td{text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top}
+  th{background:var(--card2); color:var(--muted); font-weight:600}
+  tr:last-child td{border-bottom:none}
+  code{background:#0b0d11; border:1px solid var(--line); border-radius:6px; padding:2px 7px; font-size:13px}
+  .note{color:var(--muted); font-size:14px}
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0}
+  .steps li{position:relative; padding:10px 0 10px 42px; border-bottom:1px solid var(--line)}
+  .steps li:last-child{border-bottom:none}
+  .steps li::before{
+    counter-increment:s; content:counter(s); position:absolute; left:0; top:9px;
+    width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;
+  }
+  footer{border-top:1px solid var(--line); padding:26px 0 50px; color:var(--muted); font-size:13px; text-align:center}
+  .pill{display:inline-block; background:var(--card2); border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:12px; color:var(--muted); margin:4px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="logo">🧹</div>
+  <h1>Tab Group Cleaner</h1>
+  <p class="tag">Stop Chrome's <b>Saved tab groups</b> from duplicating on every
+    restart and slowing your browser to a crawl. Free, open-source, and safe.</p>
+  <div class="btns">
+    <a class="btn primary" href="https://github.com/tristanbethe/chrome-tabgroup-cleaner/releases">⬇️ Download (Windows)</a>
+    <a class="btn ghost" href="https://github.com/tristanbethe/chrome-tabgroup-cleaner">View on GitHub</a>
+  </div>
+  <div class="sub">No install needed · backs up before every run · MIT licensed</div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Does this sound familiar?</h2>
+    <div class="card">
+      <ul class="sym">
+        <li>Your Chrome <b>Saved tab groups</b> bar keeps growing — the same names appear twice, three times, more.</li>
+        <li>Tab groups <b>multiply on every restart</b> and never go away.</li>
+        <li>It's worse with <b>Tab Session Manager (TSM)</b> restoring your session.</li>
+        <li>Chrome gets <b>slower and slower to start</b> the more they pile up.</li>
+        <li>Turning off “Save tab groups” loses your group names; deleting them by hand just brings them back.</li>
+      </ul>
+    </div>
+    <p class="note">If any of that rings a bell — this fixes it.</p>
+  </section>
+
+  <section>
+    <h2>Why no extension can fix this</h2>
+    <div class="card">
+      <p style="margin:0">Chrome stores saved tab groups in an internal database
+      (LevelDB) that extensions can't reach — there's no API for <i>saved</i> tab
+      groups. Some session managers rebuild your groups on every startup but Chrome
+      never removes the old copies, so they accumulate without bound. This tool
+      cleans that storage directly, <b>while Chrome is closed</b>, then lets your
+      session manager rebuild exactly one clean set.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pick your tool</h2>
+    <table>
+      <tr><th>Tool</th><th>Use when</th><th>What it does</th></tr>
+      <tr><td><b>Clean &amp; Launch</b></td><td>You use a session manager (e.g. TSM)</td><td>Wipes all saved groups → your manager rebuilds 1 clean set on relaunch</td></tr>
+      <tr><td><b>Keep One Set</b></td><td>You don't use a rebuilding manager</td><td>Keeps one group per name, removes only duplicates + leftover tabs</td></tr>
+      <tr><td><b>Watch &amp; Clean</b></td><td>Set &amp; forget</td><td>Runs in the background; cleans automatically every time you close Chrome</td></tr>
+    </table>
+    <p class="note">Full guide: <a href="https://github.com/tristanbethe/chrome-tabgroup-cleaner/blob/main/docs/EXECUTABLES.md">which file does what</a>.</p>
+  </section>
+
+  <section>
+    <h2>How to use it</h2>
+    <div class="card">
+      <ol class="steps">
+        <li>Download the latest release and unzip it.</li>
+        <li>Double-click the tool that fits you (see the table above).</li>
+        <li>It closes Chrome, cleans up, and reopens it — done. One clean group row.</li>
+      </ol>
+    </div>
+    <p class="note">Prefer source? It's pure Python (Windows/macOS/Linux) —
+      see the <a href="https://github.com/tristanbethe/chrome-tabgroup-cleaner#readme">README</a>.</p>
+  </section>
+
+  <section>
+    <h2>Safe by design</h2>
+    <div class="grid">
+      <div class="feat"><h3>🔒 Backs up first</h3><p>A full backup is saved before every cleanup. Fully reversible.</p></div>
+      <div class="feat"><h3>🎯 Surgical</h3><p>Only touches saved-tab-group data — bookmarks &amp; settings are left alone.</p></div>
+      <div class="feat"><h3>🔍 Open source</h3><p>MIT licensed. Read every line on GitHub before you run it.</p></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>
+    <span class="pill">Free &amp; open source</span>
+    <span class="pill">MIT license</span>
+    <span class="pill">Windows · macOS · Linux</span>
+  </div>
+  <p style="margin-top:14px">
+    Built by <a href="https://github.com/tristanbethe">Tristan Bethe</a> ·
+    <a href="https://github.com/tristanbethe/chrome-tabgroup-cleaner">Source on GitHub</a><br>
+    Not affiliated with or endorsed by Google. Use at your own risk.
+  </p>
+</footer>
+
+</body>
+</html>
