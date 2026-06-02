@@ -24,3 +24,6 @@ Thumbs.db
 
 # Original snapshot bundle (not needed in the repo)
 *.zip
+
+# Internal project context (not for the public repo)
+CLAUDE.md
