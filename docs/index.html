@@ -74,6 +74,18 @@
     width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff;
     display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;
   }
+  .coffee{
+    background:linear-gradient(135deg, rgba(251,191,36,.14), rgba(245,158,11,.05));
+    border:1px solid #3a3320; border-radius:16px; padding:24px;
+    display:flex; align-items:center; gap:18px; flex-wrap:wrap; justify-content:center;
+  }
+  .coffee .emoji{font-size:44px; line-height:1}
+  .coffee .txt{flex:1; min-width:240px}
+  .coffee .txt h3{margin:0 0 4px; font-size:18px}
+  .coffee .txt p{margin:0; color:var(--muted); font-size:14px}
+  .coffee .btn.coffee-btn{background:#f59e0b; color:#1a1205; white-space:nowrap}
+  .coffee .btn.coffee-btn:hover{background:#e0900a; text-decoration:none}
+  @media(max-width:560px){.coffee{text-align:center}.coffee .txt{text-align:center}}
   footer{border-top:1px solid var(--line); padding:26px 0 50px; color:var(--muted); font-size:13px; text-align:center}
   .pill{display:inline-block; background:var(--card2); border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:12px; color:var(--muted); margin:4px}
 </style>
@@ -159,6 +171,18 @@
       <div class="feat"><h3>🔒 Backs up first</h3><p>A full backup is saved before every cleanup. Fully reversible.</p></div>
       <div class="feat"><h3>🎯 Surgical</h3><p>Only touches saved-tab-group data — bookmarks &amp; settings are left alone.</p></div>
       <div class="feat"><h3>🔍 Open source</h3><p>MIT licensed. Read every line on GitHub before you run it.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="coffee">
+      <div class="emoji">☕</div>
+      <div class="txt">
+        <h3>Found this useful?</h3>
+        <p>It's free and always will be. If it saved you some hassle, a coffee is
+          totally optional but hugely appreciated. 💛</p>
+      </div>
+      <a class="btn coffee-btn" href="https://humanalloy.gumroad.com/coffee" target="_blank" rel="noopener">☕ Buy me a coffee</a>
     </div>
   </section>
 
