@@ -29,8 +29,9 @@ from pathlib import Path
 # ⚙️  CONFIG — which scripts to build
 # ============================================================
 TARGETS = [
-    {"script": "clean_and_launch_chrome.py", "name": "CleanAndLaunchChrome"},
-    {"script": "watch_and_clean.py",         "name": "WatchAndClean"},
+    {"script": "clean_and_launch_chrome.py",  "name": "CleanAndLaunchChrome"},
+    {"script": "clean_and_launch_keep_one.py", "name": "CleanAndLaunch_KeepOneSet"},
+    {"script": "watch_and_clean.py",          "name": "WatchAndClean"},
 ]
 ONEFILE = True          # single self-contained executable
 CONSOLE = True          # keep a console window so users see the result
@@ -81,7 +82,14 @@ def main():
     for spec in HERE.glob("*.spec"):
         spec.unlink(missing_ok=True)
 
-    print(f"\n✅ Done. Executables are in: {HERE / 'dist'}")
+    # drop the end-user guide next to the executables
+    guide = HERE.parent / "docs" / "EXECUTABLES.md"
+    dist = HERE / "dist"
+    if guide.exists() and dist.exists():
+        shutil.copy2(guide, dist / "README.txt")
+        print(f"📄 Copied end-user guide to {dist / 'README.txt'}")
+
+    print(f"\n✅ Done. Executables are in: {dist}")
     return 0
 
 

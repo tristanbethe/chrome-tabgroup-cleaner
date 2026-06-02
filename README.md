@@ -36,7 +36,8 @@ Chrome is closed — which is what this project is.
 
 | Tool | What it does |
 |---|---|
-| **`clean_and_launch_chrome.py`** + `.bat` | One click: close Chrome → clean up → relaunch. Your daily driver. |
+| **`clean_and_launch_chrome.py`** + `.bat` | One click: close Chrome → wipe → relaunch. For session-manager users. |
+| **`clean_and_launch_keep_one.py`** + `.bat` | Same, but **keeps one set** per name (for users without a rebuilding session manager). |
 | **`watch_and_clean.py`** + `.bat` | Background watcher: cleans automatically every time Chrome closes. Set & forget. |
 | **`clean_saved_tab_groups_v1.py`** | The cleaner itself (preview/dry-run, de-dup, or full wipe). |
 | **`inspect_tab_groups_db_v2.py`** | Read-only diagnostic: locates the store and measures the bloat. |
@@ -45,7 +46,13 @@ Chrome is closed — which is what this project is.
 
 ---
 
-## Quick start
+## Don't want to install Python?
+
+Grab the prebuilt **`.exe`** files from the [Releases](../../releases) page — no
+Python needed, just double-click. See **[docs/EXECUTABLES.md](docs/EXECUTABLES.md)**
+for which one to use (wipe-all, keep-one-set, or the automatic watcher).
+
+## Quick start (from source)
 
 > Requires **Python 3.8+**. Optional: `pip install colorama psutil` (nicer colored
 > output and faster process detection — both optional).
@@ -131,7 +138,13 @@ cd python-tools
 python build_exe.py
 ```
 
-Produces `CleanAndLaunchChrome` and `WatchAndClean` in `python-tools/dist/`.
+Produces three executables in `python-tools/dist/` plus a `README.txt` end-user
+guide:
+- `CleanAndLaunchChrome` — wipe all + relaunch
+- `CleanAndLaunch_KeepOneSet` — keep one set per name + relaunch
+- `WatchAndClean` — automatic background watcher
+
+Upload these as assets on a GitHub Release (they are intentionally git-ignored).
 
 ---
 

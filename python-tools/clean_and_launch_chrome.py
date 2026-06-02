@@ -3,8 +3,12 @@
 =========================
 
 One-click solution: close Chrome (if open) → clean up the saved-tab-group bloat
-→ relaunch Chrome cleanly. Your session manager (Tab Session Manager, etc.) builds
-one fresh set on startup, so you start every time with exactly one clean group row.
+→ relaunch Chrome cleanly.
+
+This is the WIPE-ALL variant (KEEP_PER_TITLE=0): best when a session manager
+(Tab Session Manager, etc.) rebuilds a fresh set on startup, so you end up with
+exactly one clean group row. If nothing rebuilds your groups, use the
+"keep one set" variant (clean_and_launch_keep_one.py) instead.
 
 Double-click `clean_and_launch.bat` (Windows) or run this script directly.
 
@@ -42,41 +46,49 @@ except ImportError:
     pass
 
 
-def main():
+def clean_and_launch(keep_per_title=KEEP_PER_TITLE, close_if_running=CLOSE_CHROME_IF_RUNNING,
+                     force_after=FORCE_CLOSE_AFTER_SEC, launch_after=LAUNCH_AFTER,
+                     profile_name=PROFILE_NAME, lock_settle=LOCK_SETTLE_SEC):
+    """Close Chrome → clean → relaunch. Shared by both exe variants."""
     CP.enable_utf8_output()
+    title = "Clean & Launch Chrome" + (" (keep one set)" if keep_per_title else "")
     print(f"\n{CYAN}{'='*64}")
-    print(f"🚀 Clean & Launch Chrome")
+    print(f"🚀 {title}")
     print(f"{'='*64}{RESET}")
 
     # 1) Close Chrome if needed
     if CP.chrome_is_running():
-        if not CLOSE_CHROME_IF_RUNNING:
-            print(f"{RED}❌ Chrome is running. Close it or set CLOSE_CHROME_IF_RUNNING=True.{RESET}")
+        if not close_if_running:
+            print(f"{RED}❌ Chrome is running. Close it first.{RESET}")
             return 1
         print(f"{YELLOW}🚪 Chrome is running — closing "
-              f"(force after {FORCE_CLOSE_AFTER_SEC}s)...{RESET}")
-        if not CP.close_chrome(force_after=FORCE_CLOSE_AFTER_SEC):
+              f"(force after {force_after}s)...{RESET}")
+        if not CP.close_chrome(force_after=force_after):
             print(f"{RED}❌ Could not close Chrome. Close it manually and try again.{RESET}")
             return 1
         print(f"{GREEN}✅ Chrome closed.{RESET}")
-        time.sleep(LOCK_SETTLE_SEC)   # wait a moment for the DB lock to release
+        time.sleep(lock_settle)   # wait a moment for the DB lock to release
 
     # 2) Clean up
-    result = run_cleanup(keep_per_title=KEEP_PER_TITLE, dry_run=False,
-                         work_on_copy=False, profile_name=PROFILE_NAME,
+    result = run_cleanup(keep_per_title=keep_per_title, dry_run=False,
+                         work_on_copy=False, profile_name=profile_name,
                          require_closed=True, confirm=False)
     if not result.get("ok"):
         print(f"{RED}❌ Cleanup not performed ({result.get('reason', '?')}).{RESET}")
         return 1
 
     # 3) Relaunch Chrome
-    if LAUNCH_AFTER:
+    if launch_after:
         print(f"\n{CYAN}🚀 Relaunching Chrome...{RESET}")
         if CP.launch_chrome():
-            print(f"{GREEN}✅ Chrome launched — you now have one clean group row.{RESET}")
+            print(f"{GREEN}✅ Chrome launched — your tab groups are cleaned up.{RESET}")
         else:
             print(f"{YELLOW}⚠️ Could not launch Chrome automatically — start it yourself.{RESET}")
     return 0
+
+
+def main():
+    return clean_and_launch(keep_per_title=KEEP_PER_TITLE)
 
 
 if __name__ == "__main__":
