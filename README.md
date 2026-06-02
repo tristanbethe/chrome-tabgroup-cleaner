@@ -8,6 +8,27 @@ If you use a session manager (like **Tab Session Manager**) and your Chrome
 restart until there are hundreds — this tool cleans it up, safely, and can keep
 it clean automatically.
 
+## Does this sound familiar?
+
+- Chrome's **Saved tab groups** bar keeps growing — the same group names appear
+  twice, three times, more.
+- Tab groups **multiply / duplicate on every restart** and never go away.
+- It's worse with **Tab Session Manager (TSM)** restoring your session — TSM
+  recreates the groups on each startup, but Chrome never removes the old copies.
+- Chrome gets **slower and slower to start** the more they pile up.
+- Turning off "Save tab groups" *loses your group names*, and deleting duplicates
+  by hand just brings them back.
+
+If any of that rings a bell, this is for you.
+
+### Specifically with Tab Session Manager (TSM)
+
+TSM rebuilds a fresh set of tab groups every time it restores your session, but the
+previous set stays in Chrome's database forever — so they accumulate without bound.
+For TSM users the **wipe-all** mode is ideal: it clears Chrome's saved groups while
+Chrome is closed, and TSM rebuilds exactly **one clean set** on the next launch. You
+keep your groups (TSM owns them) and lose the bloat.
+
 ---
 
 ## The problem
