@@ -48,6 +48,11 @@ def have_pyinstaller():
 
 
 def main():
+    for _s in (sys.stdout, sys.stderr):
+        try:
+            _s.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
     if not have_pyinstaller():
         print("❌ PyInstaller is not installed.")
         print("   Install the build dependencies first:")
